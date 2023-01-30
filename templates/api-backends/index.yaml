@@ -1,3 +1,0 @@
-service: api-backends
-provider: aws
-description: Template Queries and Alerts for API Backends

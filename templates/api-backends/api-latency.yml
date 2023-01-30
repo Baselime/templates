@@ -1,8 +1,8 @@
 api-latency:
   type: query
-  name: API latency stats
-  description: Average, P90, P95, P99 Latency for your api
   properties:
+    name: "API latency stats"
+    description: Average, P90, P95, P99 Latency for your api
     parameters:
       datasets:
         - apigateway-logs
@@ -14,12 +14,12 @@ api-latency:
 
 api-performance-alarm:
   type: alert
-  name: API latency alarm
-  description: If the AVG reponse latency is over {{ threshold }} seconds trigger an alarm
   properties:
+    name: API latency alarm
+    description: If the AVG reponse latency is over {{ threshold }} seconds trigger an alarm
     enabled: true
     parameters:
-      query: !ref api-performance
+      query: !ref api-latency
       frequency: 60mins
       window: 60mins
       threshold: "> 4000"

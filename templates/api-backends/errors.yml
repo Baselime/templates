@@ -1,0 +1,16 @@
+api-errors:
+  type: query
+  properties:
+    parameters:
+      datasets:
+        - apigateway-logs
+      calculations:
+        - COUNT
+      filters:
+        - status > = 400
+      groupBy:
+        type: number
+        value: status
+        limit: 10
+        orderBy: COUNT
+        order: DESC

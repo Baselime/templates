@@ -1,0 +1,4 @@
+service: lambda-logs-basics
+provider: aws
+description: Template Queries and Alerts for Lambda Logs
+version: '1'

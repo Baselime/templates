@@ -12,7 +12,7 @@ request-count-alert:
   properties:
     enabled: true
     parameters:
-      query: !ref new-query-785685
+      query: !ref request-count
       frequency: 60mins
       window: 1min
       threshold: "> 60000"

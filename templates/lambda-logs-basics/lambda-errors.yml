@@ -23,7 +23,7 @@ lambda-errors-alert:
     parameters:
       frequency: 30mins
       query: !ref lambda-errors
-      threshold: "> {{ threshold }}"
+      threshold: "> 10"
       window: 30mins
     channels:
       - type: slack
