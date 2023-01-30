@@ -1,0 +1,31 @@
+timeouts:
+  type: query
+  properties:
+    name: Invocations that Timed Out
+    description: Invocations that reported a time out
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - COUNT
+      filters:
+        - "@message INCLUDES Task timed out"
+      groupBy:
+        limit: 5
+        orderBy: COUNT
+        type: string
+        value: $baselime.namespace
+timeouts-alert:
+  type: alert
+  properties:
+    description: There were more than 5 timeouts over the past 30mins
+    name: Lambda invocations timeouts
+    parameters:
+      frequency: 30mins
+      query: !ref timeouts
+      threshold: "> 5"
+      window: 30mins
+    channels:
+      - type: slack
+        targets:
+          - baselime-alerts

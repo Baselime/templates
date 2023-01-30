@@ -1,0 +1,19 @@
+{
+  "name": "@baselime/templates",
+  "version": "1.0.0",
+  "description": "The baselime ORL default templates",
+  "main": "index.js",
+  "scripts": {
+    "publish": "baselime templates publish --dir ./templates"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baselime/templates.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Baselime/templates/issues"
+  },
+  "homepage": "https://github.com/Baselime/templates#readme"
+}

@@ -1,0 +1,31 @@
+lambda-errors:
+  type: query
+  properties:
+    name: Events with LogLevel ERROR
+    description: Count of the number of events with LogLevel ERROR
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - COUNT
+      filters:
+        - LogLevel = ERROR
+      groupBy:
+        limit: 10
+        orderBy: COUNT
+        type: string
+        value: $baselime.namespace
+lambda-errors-alert:
+  type: alert
+  properties:
+    description: There were more than {{ threshold }} errors over the past 30mins
+    name: Errors during Lambda invocations
+    parameters:
+      frequency: 30mins
+      query: !ref lambda-errors
+      threshold: "> {{ threshold }}"
+      window: 30mins
+    channels:
+      - type: slack
+        targets:
+          - baselime-alerts
