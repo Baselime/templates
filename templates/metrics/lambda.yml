@@ -1,0 +1,40 @@
+lambda-overview:
+  type: query
+  properties:
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/Lambda
+      groupBy:
+        type: string
+        value: metric_name
+        limit: 10
+        orderBy: SUM(value.sum)
+        order: DESC
+lambda-throttles:
+  type: query
+  properties:
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/Lambda
+        - metric_name = Throttles
+alert-lambda-throttles:
+  type: alert
+  properties:
+    enabled: true
+    parameters:
+      query: !ref lambda-throttles
+      frequency: 15mins
+      window: 15mins
+      threshold: "> 1"
+    channels:
+      - type: slack
+        targets:
+          - baselime-alerts

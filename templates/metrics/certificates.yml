@@ -1,0 +1,31 @@
+certificate-expiries:
+  type: query
+  properties:
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - MIN(value.sum)
+      filters:
+        - $baselime.namespace = AWS/CertificateManager
+        - metric_name = DaysToExpiry
+      groupBy:
+        type: string
+        value: dimensions.CertificateArn
+        limit: 10
+        orderBy: MIN(value.sum)
+
+
+certificates-about-to-expire-alarm:
+  type: alert
+  properties:
+    enabled: true
+    parameters:
+      query: !ref certificate-expiries
+      frequency: 60mins
+      window: 60mins
+      threshold: "< 3"
+    channels:
+      - type: slack
+        targets:
+          - baselime-alerts
