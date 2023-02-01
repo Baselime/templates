@@ -21,11 +21,11 @@ Monitor your API Backends with the Starter template for queries, and alerts. The
 
 ### Alarms
 
-| Name | Description | Triggered by | ID |
-|------|-------------|-------------|----|
-| API Latency Alarm | Triggers an alarm if the AVG response latency is over a threshold | api-latency | [api-latency-alarm](./api-latency.yml) |
-| API Errors Alarm | Triggers an alarm if the count of API errors is over a threshold | api-errors | [api-errors-alarm](./errors.yml)|
-| Request Count Alarm | Triggers an alarm if the count of requests is over a threshold | request-count | [request-count-alarm](./request-count.yml) |
+| Name | Description | Triggered by | Threshold | Window |
+|------|-------------|-------------|----|----------|
+| API Latency Alarm | Triggers an alarm if the AVG response latency is over a threshold | api-latency |  `> 4000` | `60mins` |
+| API Errors Alarm | Triggers an alarm if the count of API errors is over a threshold | api-errors |  `> 10` | `10mins` |
+| Request Count Alarm | Triggers an alarm if the count of requests is over a threshold | request-count |  `> 60000` | `1min` |
 
 
 ## Combos
