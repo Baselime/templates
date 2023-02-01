@@ -1,6 +1,8 @@
 dynamodb-streams:
   type: query
   properties:
+    name: Records Processed By A Stream
+    description: How many records have you processed with dynamodb streams
     parameters:
       datasets:
         - cloudwatch-metrics

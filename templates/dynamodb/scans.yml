@@ -57,7 +57,7 @@ scan-count:
         type: string
         value: dimensions.TableName
         limit: 10
-        orderBy: SUM(value.sum)
+        orderBy: SUM(value.count)
         order: DESC
 
 friends-dont-let-friends-run-scans:
@@ -67,7 +67,7 @@ friends-dont-let-friends-run-scans:
     description: If the scan count is more than 10 for a 10 minute window alert
     enabled: true
     parameters:
-      query: !ref api-latency
+      query: !ref scan-count
       frequency: 60mins
       window: 10mins
       threshold: "> 10"

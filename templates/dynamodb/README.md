@@ -11,15 +11,15 @@ Monitor DynamoDB Performance with the baselime dynamodb template. These queries 
 
 | Name | Description | Dataset | Id |
 |------|-------------|---------|----|
-| DynamoDB Consumed Write Capacity | N/A | cloudwatch-metrics | dynamodb-consumed-write-capacity |
-| DynamoDB Consumed Read Capacity | N/A | cloudwatch-metrics | dynamodb-consumed-read-capacity |
+| DynamoDB Consumed Write Capacity | How much write capacity you have consumed | cloudwatch-metrics | dynamodb-consumed-write-capacity |
+| DynamoDB Consumed Read Capacity | How much read capacity you have consumed | cloudwatch-metrics | dynamodb-consumed-read-capacity |
 | Scan Latency | Duration of scans | cloudwatch-metrics | scan-latency |
 | Scan Items Returned | Number of items returned by a scan | cloudwatch-metrics | scan-items-returned |
 | Scans | Number of scans | cloudwatch-metrics | scan-count |
 | Slow Put Item Requests | The 10 slowest Put Item requests Grouped By Table | cloudwatch-metrics | slow-put-item-requests |
 | Slow Get Item Requests | The 10 slowest Put Item requests Grouped By Table | cloudwatch-metrics | slow-get-item-requests |
 | Slow Update Item Requests | The 10 slowest Update Item requests Grouped By Table | cloudwatch-metrics | slow-update-item-requests |
-
+| Records Processed By A Stream | How many records have you processed with dynamodb streams | cloudwatch-metrics | dynamodb-streams | 
 
 ### Alarms
 

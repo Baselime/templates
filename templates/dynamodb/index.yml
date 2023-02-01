@@ -1,0 +1,4 @@
+service: dynamodb
+provider: aws
+description: Template Queries and Alerts for DynamoDB
+version: '1'
