@@ -1,0 +1,4 @@
+service: metrics
+provider: aws
+description: Template Queries and Alerts for Metrics
+version: '1'

@@ -1,6 +1,8 @@
 request-count:
   type: query
   properties:
+    name: "Request Count"
+    description: Total number of requests made to the API Gateway
     parameters:
       datasets:
         - apigateway-logs
@@ -10,7 +12,8 @@ request-count:
 request-count-alert:
   type: alert
   properties:
-    enabled: true
+    name: "Request Count Alert"
+    description: If the number of requests made to the API Gateway exceeds 60000 in a 1 minute period, trigger an alarm
     parameters:
       query: !ref request-count
       frequency: 60mins

@@ -1,0 +1,34 @@
+api-overview:
+  type: query
+  properties:
+    name: "API Overview"
+    description: Summary of top 10 metrics for AWS ApiGateway in CloudWatch
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/ApiGateway
+      groupBy:
+        type: string
+        value: metric_name
+        limit: 10
+        orderBy: SUM(value.sum)
+        order: DESC
+
+api-error-alarm:
+  type: alert
+  properties:
+    name: API error alarm
+    description: If the number of errors is over {{ threshold }} in a {{ window }} minute period, trigger an alarm
+    enabled: true
+    parameters:
+      query: !ref api-errors
+      frequency: 60mins
+      window: 60mins
+      threshold: "> 10"
+    channels:
+      - type: slack
+        targets:
+          - baselime-alerts

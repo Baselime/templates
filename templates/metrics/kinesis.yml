@@ -1,0 +1,25 @@
+kinesis:
+  type: query
+  properties:
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/Kinesis
+        - dimensions.StreamName = prod-vortex-stream
+        - metric_name != GetRecords.Bytes
+        - metric_name != GetRecords.Latency
+        - metric_name != GetRecords.IteratorAgeMilliseconds
+        - metric_name != PutRecord.Latency
+        - metric_name != GetRecords.Records
+        - metric_name != GetRecords.Success
+        - metric_name != ReadProvisionedThroughputExceeded
+        - metric_name != GetRecords.IteratorAge
+      groupBy:
+        type: string
+        value: metric_name
+        limit: 16
+        orderBy: SUM(value.sum)
+        order: DESC
