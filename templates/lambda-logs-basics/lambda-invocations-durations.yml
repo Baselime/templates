@@ -2,7 +2,7 @@ lambda-invocations-durations:
   type: query
   properties:
     name: Duration of lambda invocations
-    description: Statistics on the duration of lambda invocations across the application
+    description: Max and P99 duration for lambda invocations
     parameters:
       datasets:
         - lambda-logs

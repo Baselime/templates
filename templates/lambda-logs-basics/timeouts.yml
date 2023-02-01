@@ -1,7 +1,7 @@
 timeouts:
   type: query
   properties:
-    name: Invocations that Timed Out
+    name: Lambda Timeouts
     description: Invocations that reported a time out
     parameters:
       datasets:
