@@ -22,5 +22,5 @@ Monitor your Lambda functions with the Starter template full of queries, and ale
 
 | Name | Description | Triggered by  | Threshold | Window |
 |------|-------------|----------------|----------|--------|
-| Errors during Lambda invocations | There were more than {{ threshold }} errors over the past 30mins | `lambda-errors` | `> 10` | `30mins` |
-| Lambda invocations timeouts | There were more than 5 timeouts over the past 30mins | `timeouts` | `> 5` | `30mins` |
+| Errors during Lambda invocations | There were more than {{ threshold }} errors over the past 30mins | lambda-errors | `> 10` | `30mins` |
+| Lambda invocations timeouts | There were more than 5 timeouts over the past 30mins | timeouts | `> 5` | `30mins` |
