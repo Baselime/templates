@@ -1,0 +1,77 @@
+scan-latency:
+  type: query
+  properties:
+    name: Scan Latency
+    description: Duration of scans
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/DynamoDB
+        - dimensions.Operation = Scan
+        - metric_name = SuccessfulRequestLatency
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: SUM(value.sum)
+
+scan-items-returned:
+  type: query
+  properties:
+    name: Scan Items Returned
+    description: Number of items returned by a scan
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/DynamoDB
+        - dimensions.Operation = Scan
+        - metric_name = ReturnedItemCount
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: SUM(value.sum)
+        order: DESC
+
+scan-count:
+  type: query
+  properties:
+    name: Scans
+    description: Number of scans
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.count)
+      filters:
+        - $baselime.namespace = AWS/DynamoDB
+        - dimensions.Operation = Scan
+        - metric_name = ReturnedItemCount
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: SUM(value.sum)
+        order: DESC
+
+friends-dont-let-friends-run-scans:
+  type: alert
+  properties:
+    name: Friends don't let friends run scans
+    description: If the scan count is more than 10 for a 10 minute window alert
+    enabled: true
+    parameters:
+      query: !ref api-latency
+      frequency: 60mins
+      window: 10mins
+      threshold: "> 10"
+    channels:
+      - type: slack
+        targets:
+          - baselime-alerts

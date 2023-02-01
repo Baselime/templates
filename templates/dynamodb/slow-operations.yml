@@ -1,0 +1,98 @@
+slow-put-item-requests:
+  type: query
+  properties:
+    name: "Slow Put Item Requests"
+    description: The {{ limit }} slowest Put Item requests Grouped By Table
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - MAX(value.max)
+      filters:
+        - dimensions.Operation = PutItem
+        - $baselime.namespace = AWS/DynamoDB
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: MAX(value.max)
+
+
+slow-get-item-requests:
+  type: query
+  properties:
+    name: "Slow Get Item Requests"
+    description: The {{ limit }} slowest Put Item requests Grouped By Table
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - MAX(value.max)
+      filters:
+        - dimensions.Operation = GetItem
+        - $baselime.namespace = AWS/DynamoDB
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: MAX(value.max)
+
+
+slow-update-item-requests:
+  type: query
+  properties:
+    name: "Slow Update Item Requests"
+    description: The {{ limit }} slowest Update Item requests Grouped By Table
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - MAX(value.max)
+      filters:
+        - dimensions.Operation = UpdateItem
+        - $baselime.namespace = AWS/DynamoDB
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: MAX(value.max)
+
+slow-delete-item-requests:
+  type: query
+  properties:
+    name: "Slow Delete Item Requests"
+    description: The {{ limit }} slowest Delete Item requests Grouped By Table
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - MAX(value.max)
+      filters:
+        - dimensions.Operation = DeleteItem
+        - $baselime.namespace = AWS/DynamoDB
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: MAX(value.max)
+        
+slow-queries:
+  type: query
+  properties:
+    name: Query Requests
+    description: The {{ limit }} slowest Query requests Grouped By Table
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - MAX(value.max)
+      filters:
+        - $baselime.namespace = AWS/DynamoDB
+        - dimensions.Operation = Query
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: MAX(value.max)
+        order: DESC
+

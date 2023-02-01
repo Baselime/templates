@@ -1,0 +1,35 @@
+dynamodb-consumed-write-capacity:
+  type: query
+  properties:
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/DynamoDB
+        - metric_name = ConsumedWriteCapacityUnits
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: SUM(value.sum)
+        order: DESC
+
+dynamodb-consumed-read-capacity:
+  type: query
+  properties:
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/DynamoDB
+        - metric_name = ConsumedReadCapacityUnits
+      groupBy:
+        type: string
+        value: dimensions.TableName
+        limit: 10
+        orderBy: SUM(value.sum)
+        order: DESC
