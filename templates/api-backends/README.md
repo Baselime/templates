@@ -14,6 +14,7 @@ Monitor your API Backends with the Starter template for queries, and alerts. The
 | Name | Description | Dataset | ID |
 |------|-------------|---------|----|
 | API Latency | Provides stats on API latency (AVG, P90, P95, P99) | apigateway-logs | [api-latency](./api-latency.yml) |
+| API Integration Latency | The speed of API gateway compared to the speed integration | apigateway-logs | [api-integration-latency](./api-integration-latency.yml)
 | API Errors | Counts the number of API errors and groups by status | apigateway-logs | [api-errors](./errors.yml) |
 | API Overview | Sums the values of API metrics | cloudwatch-metrics | [api-overview](./api-overview.yml) |
 | Request Count | Counts the number of requests | apigateway-logs | [request-count](./request-count.yml) |

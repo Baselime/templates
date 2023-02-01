@@ -1,0 +1,20 @@
+api-integration-latency:
+  type: query
+  properties:
+    name: API Integration Latency
+    description: The speed of API gateway compared to the speed integration
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - AVG(value.sum)
+      filterCombination: OR
+      filters:
+        - metric_name = Latency
+        - metric_name = IntegrationLatency
+      groupBy:
+        type: string
+        value: metric_name
+        limit: 10
+        orderBy: AVG(value.sum)
+        order: DESC
