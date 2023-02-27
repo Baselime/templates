@@ -1,0 +1,17 @@
+api-errors:
+  type: query
+  properties:
+    description: "API Gateway that respond with status code above or equal to 400 most frequently"
+    parameters:
+      datasets:
+        - apigateway-logs
+      calculations:
+        - COUNT
+      filters:
+        - status >= 400
+      groupBy:
+        type: string
+        value: $baselime.namespace
+        limit: 10
+        orderBy: COUNT
+        order: DESC

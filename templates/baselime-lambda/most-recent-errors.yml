@@ -1,0 +1,15 @@
+most-recent-errors:
+  type: query
+  properties:
+    description: The most recent errors in Lambda logs
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - COUNT
+      filters:
+        - LogLevel = ERROR
+      groupBy:
+        value: $baselime.namespace
+        type: string
+        orderBy: COUNT

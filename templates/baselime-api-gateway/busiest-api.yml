@@ -1,0 +1,15 @@
+busiest-api:
+  type: query
+  properties:
+    description: Total number of requests made to the API Gateway
+    parameters:
+      datasets:
+        - apigateway-logs
+      calculations:
+        - COUNT
+      groupBy:
+        type: string
+        value: $baselime.namespace
+        orderBy: COUNT
+        limit: 10
+

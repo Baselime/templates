@@ -1,0 +1,19 @@
+lambda-cold-starts:
+  type: query
+  properties:
+    description: Lambda functions with the worst cold starts
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - MAX(@initDuration)
+        - MIN(@initDuration)
+        - AVG(@initDuration)
+        - COUNT
+      filters:
+        - "@type INCLUDES REPORT"
+      groupBy:
+        value: $baselime.namespace
+        type: string
+        orderBy: COUNT
+        limit: 10

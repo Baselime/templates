@@ -1,0 +1,19 @@
+percentile-of-lambda-memory-usage:
+  type: query
+  properties:
+    description: Min, Max, Avg, P90 of maxMemoryUsed
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - MAX(@maxMemoryUsed)
+        - MIN(@maxMemoryUsed)
+        - AVG(@maxMemoryUsed)
+        - P90(@maxMemoryUsed)
+        - COUNT
+      filters:
+        - "@type = REPORT"
+      groupBy:
+        value: $baselime.namespace
+        type: string
+        orderBy: MAX(@maxMemoryUsed)

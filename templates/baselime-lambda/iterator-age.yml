@@ -1,0 +1,17 @@
+lambda-iterator-age:
+  type: query
+  properties:
+    description: Lambda functions that are lagging behind their input stream
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - MAX(value.max)
+      filters:
+        - $baselime.namespace = AWS/Lambda
+        - metric_name = IteratorAge
+      groupBy:
+        value: dimensions.FunctionName
+        type: string
+        orderBy: MAX(value.max)
+        limit: 10

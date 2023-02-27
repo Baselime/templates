@@ -1,0 +1,17 @@
+function-utilisation:
+  type: query
+  properties:
+    description: Utilisation of the Lambda functions with the highest memory allocation
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - AVG(@memorySize)
+        - P99(@maxMemoryUsed)
+      filters:
+        - "@type INCLUDES REPORT"
+      groupBy:
+        value: $baselime.namespace
+        type: string
+        orderBy: AVG(@memorySize)
+        limit: 10

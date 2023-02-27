@@ -1,0 +1,4 @@
+service: baselime-lambda
+provider: aws
+description: Template for baseline observability for AWS Lambda 
+version: '0.0.1'

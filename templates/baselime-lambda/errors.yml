@@ -1,0 +1,16 @@
+lambda-errors-only:
+  type: query
+  properties:
+    description: Lambda functions that log the most errors
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - COUNT
+      filters:
+        - "LogLevel = ERROR"
+      groupBy:
+        value: $baselime.namespace
+        type: string
+        orderBy: COUNT
+        limit: 10

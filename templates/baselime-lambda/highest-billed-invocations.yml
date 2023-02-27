@@ -1,0 +1,19 @@
+highest-billed-invocations:
+  type: query
+  properties:
+    description: Invocations with the highest billed duration
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - MAX(@billedDuration)
+        - MIN(@billedDuration)
+        - AVG(@billedDuration)
+        - P90(@billedDuration)
+        - COUNT
+      filters:
+        - "@type = REPORT"
+      groupBy:
+        value: $baselime.namespace
+        type: string
+        orderBy: MAX(@billedDuration)

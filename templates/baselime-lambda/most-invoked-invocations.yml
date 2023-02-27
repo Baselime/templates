@@ -1,0 +1,17 @@
+most-invoked-lambdas:
+  type: query
+  properties:
+    description: Lambda fuctions that are invoked most frequently
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - SUM(value.sum)
+      filters:
+        - $baselime.namespace = AWS/Lambda
+        - metric_name = Invocations
+      groupBy:
+        value: dimensions.FunctionName
+        type: string
+        orderBy: SUM(value.sum)
+        limit: 10

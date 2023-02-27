@@ -1,0 +1,4 @@
+service: baseline-api-gateway
+provider: aws
+description: Template for baseline observability for API Gateway
+version: '0.0.1'

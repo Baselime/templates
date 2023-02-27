@@ -1,0 +1,18 @@
+api-latency:
+  type: query
+  properties:
+    description: Average, P90, P95, P99 Latency for your api
+    parameters:
+      datasets:
+        - apigateway-logs
+      calculations:
+        - P90(responseLatency)
+        - P95(responseLatency)
+        - P99(responseLatency)
+        - AVG(responseLatency)
+      groupBy:
+        type: string
+        value: $baselime.namespace
+        orderBy: P90(responseLatency)
+        limit 10
+

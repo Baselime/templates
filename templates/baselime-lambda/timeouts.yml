@@ -1,0 +1,16 @@
+lambda-timeouts:
+  type: query
+  properties:
+    description: Lambda functions that timeout most frequencly
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - COUNT
+        - P90(@timeout)
+      filters:
+        - "@timeout EXISTS"
+      groupBy:
+        value: $baselime.namespace
+        type: string
+        orderBy: COUNT

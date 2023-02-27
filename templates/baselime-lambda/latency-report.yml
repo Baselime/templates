@@ -1,0 +1,20 @@
+lambda-latency-report:
+  type: query
+  properties:
+    description: Report on the latency of lambda invocations as reported by CloudWatch
+    parameters:
+      datasets:
+        - cloudwatch-metrics
+      calculations:
+        - MAX(value.max)
+        - MIN(value.min)
+        - SUM(value.sum)
+        - SUM(value.count)
+      filters:
+        - $baselime.namespace = AWS/Lambda
+        - metric_name = Duration
+      groupBy:
+        value: dimensions.FunctionName
+        type: string
+        orderBy: MAX(value.max)
+        limit: 10

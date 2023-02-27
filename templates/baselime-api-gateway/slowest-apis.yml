@@ -1,20 +1,18 @@
-api-integration-latency:
+slowest-apis:
   type: query
   properties:
-    name: API Integration Latency
-    description: The speed of API gateway compared to the speed integration
+    description: API Gateways with the highest latency
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
         - AVG(value.sum)
-      filterCombination: OR
       filters:
         - metric_name = Latency
-        - metric_name = IntegrationLatency
+        - $baselime.namespace = AWS/ApiGateway
       groupBy:
         type: string
-        value: metric_name
+        value: dimensions.ApiName
         limit: 10
         orderBy: AVG(value.sum)
         order: DESC

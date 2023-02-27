@@ -1,0 +1,19 @@
+slowest-lambda-functions:
+  type: query
+  properties:
+    description: Lambda functions with the longest execution time
+    parameters:
+      datasets:
+        - lambda-logs
+      calculations:
+        - P90(@duration)
+        - MAX(@duration)
+        - MEDIAN(@duration)
+        - AVG(@duration)
+      filters:
+        - "@type = REPORT"
+      groupBy:
+        value: $baselime.namespace
+        type: string
+        orderBy: P90(@duration)
+        limit: 10
