@@ -1,0 +1,12 @@
+s3-bucket-policy-changes:
+  type: query
+  properties:
+    description: Changes to S3 bucket access policies
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT as BucketPolicyChangeCount
+      filters:
+        - $baselime.namespace = s3.amazonaws.com
+        - eventName IN (PutBucketAcl, PutBucketPolicy, PutBucketCors, PutBucketLifecycle, PutBucketReplication, DeleteBucketPolicy, DeleteBucketCors, DeleteBucketLifecycle, DeleteBucketReplication)

@@ -1,0 +1,15 @@
+top-cloudtrail-event-sources:
+  type: query
+  properties:
+    description: Top 10 most frequent cloudtrail event sources
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT
+      groupBy:
+        type: string
+        value: eventSource
+        orderBy: COUNT
+        limit: 10
+

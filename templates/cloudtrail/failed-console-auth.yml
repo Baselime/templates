@@ -1,0 +1,13 @@
+failed-console-auth:
+  type: query
+  properties:
+    description: Failed authentication through the AWS console
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT as FailedConsoleAuthCount
+      filters:
+        - eventName = ConsoleLogin
+        - errorMessage = Failed authentication
+

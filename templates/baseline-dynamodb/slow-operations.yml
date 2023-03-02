@@ -1,24 +1,25 @@
-slow-put-item-requests:
+dynamodb-slow-put-item-requests:
   type: query
   properties:
-    name: "Slow Put Item Requests"
-    description: The {{ limit }} slowest Put Item requests Grouped By Table
+    description: Tables with the slowest PutItem requests
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - MAX(value.max)
+        - MAX(value.max) as Latency
       filters:
         - dimensions.Operation = PutItem
         - $baselime.namespace = AWS/DynamoDB
+        - metric_name = SuccessfulRequestLatency
       groupBy:
         type: string
         value: dimensions.TableName
         limit: 10
-        orderBy: MAX(value.max)
+        orderBy: Latency
+        order: DESC
 
 
-slow-get-item-requests:
+dynamodb-slow-get-item-requests:
   type: query
   properties:
     name: "Slow Get Item Requests"
@@ -36,9 +37,10 @@ slow-get-item-requests:
         value: dimensions.TableName
         limit: 10
         orderBy: MAX(value.max)
+        order: DESC
 
 
-slow-update-item-requests:
+dynamodb-slow-update-item-requests:
   type: query
   properties:
     name: "Slow Update Item Requests"
@@ -56,8 +58,9 @@ slow-update-item-requests:
         value: dimensions.TableName
         limit: 10
         orderBy: MAX(value.max)
+        order: DESC
 
-slow-delete-item-requests:
+dynamodb-slow-delete-item-requests:
   type: query
   properties:
     name: "Slow Delete Item Requests"
@@ -75,8 +78,9 @@ slow-delete-item-requests:
         value: dimensions.TableName
         limit: 10
         orderBy: MAX(value.max)
+        order: DESC
         
-slow-queries:
+dynamodb-slow-queries:
   type: query
   properties:
     name: Query Requests

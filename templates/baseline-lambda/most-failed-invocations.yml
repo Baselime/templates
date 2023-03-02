@@ -1,17 +1,17 @@
-mosth-throttled-lambdas:
+most-failed-lambda-invocations:
   type: query
   properties:
-    description: Lambda functions that are throttled the most
+    description: Lambda functions with the most failed invocations
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - SUM(value.sum)
+        - SUM(value.sum) as ErrorCount
       filters:
         - $baselime.namespace = AWS/Lambda
-        - metric_name = Throttles
+        - metric_name = Errors
       groupBy:
         value: dimensions.FunctionName
         type: string
-        orderBy: SUM(value.sum)
+        orderBy: ErrorCount
         limit: 10

@@ -1,0 +1,11 @@
+recent-iam-users:
+  type: query
+  properties:
+    description: Recently created IAM users
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT as CreateUserCount
+      filters:
+        - eventName = CreateUser

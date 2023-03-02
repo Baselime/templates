@@ -1,17 +1,17 @@
-most-invoked-lambdas:
+mosth-throttled-lambdas:
   type: query
   properties:
-    description: Lambda fuctions that are invoked most frequently
+    description: Lambda functions that are throttled the most
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - SUM(value.sum)
+        - SUM(value.sum) as Throttles
       filters:
         - $baselime.namespace = AWS/Lambda
-        - metric_name = Invocations
+        - metric_name = Throttles
       groupBy:
         value: dimensions.FunctionName
         type: string
-        orderBy: SUM(value.sum)
+        orderBy: Throttles
         limit: 10

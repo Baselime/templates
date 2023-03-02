@@ -1,0 +1,4 @@
+service: baseline-cloudtrail
+provider: aws
+description: Template for baseline internal AWS API calls observability for serverless architectures  
+version: '0.0.1'

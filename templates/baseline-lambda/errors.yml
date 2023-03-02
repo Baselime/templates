@@ -6,11 +6,11 @@ lambda-errors-only:
       datasets:
         - lambda-logs
       calculations:
-        - COUNT
+        - COUNT as ErrorCount
       filters:
         - "LogLevel = ERROR"
       groupBy:
         value: $baselime.namespace
         type: string
-        orderBy: COUNT
+        orderBy: ErrorCount
         limit: 10

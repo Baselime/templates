@@ -6,7 +6,7 @@ slowest-apis:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - AVG(value.sum)
+        - AVG(value.sum) as Latency
       filters:
         - metric_name = Latency
         - $baselime.namespace = AWS/ApiGateway
@@ -14,5 +14,5 @@ slowest-apis:
         type: string
         value: dimensions.ApiName
         limit: 10
-        orderBy: AVG(value.sum)
+        orderBy: Latency
         order: DESC

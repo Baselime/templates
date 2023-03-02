@@ -1,13 +1,12 @@
-scan-latency:
+dynamodb-slowest-scans:
   type: query
   properties:
-    name: Scan Latency
-    description: Duration of scans
+    description: DynamoDB tables doing the slowest scans
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - SUM(value.sum)
+        - SUM(value.sum) as SuccessfulRequestLatency
       filters:
         - $baselime.namespace = AWS/DynamoDB
         - dimensions.Operation = Scan
@@ -16,18 +15,17 @@ scan-latency:
         type: string
         value: dimensions.TableName
         limit: 10
-        orderBy: SUM(value.sum)
+        orderBy: SuccessfulRequestLatency
 
-scan-items-returned:
+dynamodb-scan-items-returned:
   type: query
   properties:
-    name: Scan Items Returned
-    description: Number of items returned by a scan
+    description: DynamoDB tables returning the most items from scans
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - SUM(value.sum)
+        - SUM(value.sum) as ReturnedItemCount
       filters:
         - $baselime.namespace = AWS/DynamoDB
         - dimensions.Operation = Scan
@@ -36,19 +34,19 @@ scan-items-returned:
         type: string
         value: dimensions.TableName
         limit: 10
-        orderBy: SUM(value.sum)
+        orderBy: ReturnedItemCount
         order: DESC
 
-scan-count:
+dynamodb-most-scans:
   type: query
   properties:
     name: Scans
-    description: Number of scans
+    description: DynamoDB tables doing the most scan operations
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - SUM(value.count)
+        - SUM(value.count) as CountScanOperations
       filters:
         - $baselime.namespace = AWS/DynamoDB
         - dimensions.Operation = Scan
@@ -57,21 +55,5 @@ scan-count:
         type: string
         value: dimensions.TableName
         limit: 10
-        orderBy: SUM(value.count)
+        orderBy: CountScanOperations
         order: DESC
-
-friends-dont-let-friends-run-scans:
-  type: alert
-  properties:
-    name: Friends don't let friends run scans
-    description: If the scan count is more than 10 for a 10 minute window alert
-    enabled: true
-    parameters:
-      query: !ref scan-count
-      frequency: 60mins
-      window: 10mins
-      threshold: "> 10"
-    channels:
-      - type: slack
-        targets:
-          - baselime-alerts

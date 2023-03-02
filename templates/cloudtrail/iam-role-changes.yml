@@ -1,0 +1,15 @@
+iam-role-changes:
+  type: query
+  properties:
+    description: Changes to IAM roles
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT as IamRoleChangesCount
+      filters:
+        - eventName IN (DeleteGroupPolicy, DeleteRolePolicy, DeleteUserPolicy, PutGroupPolicy, PutRolePolicy, PutUserPolicy, CreatePolicy, DeletePolicy, CreatePolicyVersion, DeletePolicyVersion, AttachRolePolicy, DetachRolePolicy, AttachUserPolicy, DetachUserPolicy, AttachGroupPolicy, DetachGroupPolicy)
+      groupBy:
+        type: string
+        value: userIdentity.arn
+        orderBy: COUNT

@@ -1,0 +1,17 @@
+aws-console-root-user-usage:
+  type: query
+  properties:
+    description: Most recent API calls made using the root user
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT as RootUserCalls
+      filters:
+        - userIdentity.type = Root
+        - userIdentity.invokedBy DOES_NOT_EXIST
+        - eventType != AwsServiceEvent
+      groupBy:
+        type: string
+        value: eventName
+        orderBy: RootUserCalls

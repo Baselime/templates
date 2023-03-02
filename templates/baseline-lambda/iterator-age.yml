@@ -6,12 +6,12 @@ lambda-iterator-age:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - MAX(value.max)
+        - MAX(value.max) as IteratorAge
       filters:
         - $baselime.namespace = AWS/Lambda
         - metric_name = IteratorAge
       groupBy:
         value: dimensions.FunctionName
         type: string
-        orderBy: MAX(value.max)
+        orderBy: IteratorAge
         limit: 10

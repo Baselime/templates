@@ -1,0 +1,15 @@
+cloudtrail-config-changes:
+  type: query
+  properties:
+    description: Changes to Cloudtrail configurations
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT as CloudTrailConfigChanges
+      filters:
+        - eventName IN (CreateTrail, UpdateTrail, DeleteTrail, StartLogging, StopLogging)
+      groupBy:
+        type: string
+        value: userIdentity.arn
+        orderBy: CloudTrailConfigChanges

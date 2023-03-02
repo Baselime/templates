@@ -1,0 +1,17 @@
+unauthorized-cloudtrail-api-calls:
+  type: query
+  properties:
+    description: Unauthorized AWS Service API Calls
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT as UnauthorizedApiCallsCount
+      filters:
+        - errorCode IN (AccessDenied, UnauthorizedOperation)
+      groupBy:
+        type: string
+        value: eventName
+        orderBy: COUNT
+        limit: 10
+

@@ -1,13 +1,12 @@
 dynamodb-consumed-write-capacity:
   type: query
   properties:
-    name: Write Capacity
-    description: How much write capacity you have consumed
+    name: DynamoDB tables consuming the most write capacity units
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - SUM(value.sum)
+        - SUM(value.sum) as ConsumedWriteCapacityUnits
       filters:
         - $baselime.namespace = AWS/DynamoDB
         - metric_name = ConsumedWriteCapacityUnits
@@ -15,19 +14,18 @@ dynamodb-consumed-write-capacity:
         type: string
         value: dimensions.TableName
         limit: 10
-        orderBy: SUM(value.sum)
+        orderBy: ConsumedWriteCapacityUnits
         order: DESC
 
 dynamodb-consumed-read-capacity:
   type: query
   properties:
-    name: Read Capacity
-    description: How much read capacity you have consumed
+    name: DynamoDB tables consuming the most read capacity units
     parameters:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - SUM(value.sum)
+        - SUM(value.sum) as ConsumedReadCapacityUnits
       filters:
         - $baselime.namespace = AWS/DynamoDB
         - metric_name = ConsumedReadCapacityUnits
@@ -35,5 +33,5 @@ dynamodb-consumed-read-capacity:
         type: string
         value: dimensions.TableName
         limit: 10
-        orderBy: SUM(value.sum)
+        orderBy: ConsumedReadCapacityUnits
         order: DESC

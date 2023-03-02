@@ -1,0 +1,15 @@
+top-cloudtrail-event-types:
+  type: query
+  properties:
+    description: Top 10 most frequent cloudtrail event types
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT
+      groupBy:
+        type: string
+        value: eventName
+        orderBy: COUNT
+        limit: 10
+

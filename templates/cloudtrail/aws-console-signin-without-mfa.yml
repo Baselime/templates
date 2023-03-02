@@ -1,0 +1,16 @@
+aws-console-signin-without-mfa:
+  type: query
+  properties:
+    description: Detect users signing in the console with no MFA activated
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT
+      filters:
+        - eventName = ConsoleLogin
+        - additionalEventData.MFAUsed != Yes
+      groupBy:
+        type: string
+        value: userIdentity.arn
+        orderBy: COUNT

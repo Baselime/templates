@@ -1,0 +1,16 @@
+cloudtrail-errors:
+  type: query
+  properties:
+    description: Most frequent AWS Service calls that result in errors
+    parameters:
+      datasets:
+        - cloudtrail
+      calculations:
+        - COUNT as ErrorCount
+      filters:
+        - errorCode EXISTS
+      groupBy:
+        type: string
+        value: errorCode
+        orderBy: ErrorCount
+        limit: 10

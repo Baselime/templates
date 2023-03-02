@@ -6,15 +6,14 @@ lambda-latency-report:
       datasets:
         - cloudwatch-metrics
       calculations:
-        - MAX(value.max)
-        - MIN(value.min)
-        - SUM(value.sum)
-        - SUM(value.count)
+        - MAX(value.max) as MaxDuration
+        - MIN(value.min) as MinDuration
+        - P90(value.sum) as p90Duration
       filters:
         - $baselime.namespace = AWS/Lambda
         - metric_name = Duration
       groupBy:
         value: dimensions.FunctionName
         type: string
-        orderBy: MAX(value.max)
+        orderBy: MaxDuration
         limit: 10

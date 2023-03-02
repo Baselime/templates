@@ -1,4 +1,4 @@
-service: dynamodb
+service: baseline-dynamodb
 provider: aws
 description: Template Queries and Alerts for DynamoDB
-version: '1'
+version: '0.0.4'

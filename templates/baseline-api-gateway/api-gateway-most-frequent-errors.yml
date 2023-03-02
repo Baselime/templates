@@ -6,11 +6,11 @@ api-gateway-most-frequent-errors:
       datasets:
         - apigateway-logs
       calculations:
-        - COUNT
+        - COUNT as ErrorCount
       filters:
         - status >= 400
       groupBy:
         type: number
         value: status
-        orderBy: COUNT
+        orderBy: ErrorCount
         order: DESC

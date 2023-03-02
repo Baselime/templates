@@ -14,5 +14,5 @@ api-latency:
         type: string
         value: $baselime.namespace
         orderBy: P90(responseLatency)
-        limit 10
+        limit: 10
 
