@@ -4,7 +4,7 @@
   "description": "The baselime ORL default templates",
   "main": "index.js",
   "scripts": {
-    "publish": "baselime templates publish --dir ./templates"
+    "publish": "baselime templates publish --path ./templates/ --recurse"
   },
   "repository": {
     "type": "git",

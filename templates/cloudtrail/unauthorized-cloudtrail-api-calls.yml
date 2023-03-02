@@ -12,6 +12,6 @@ unauthorized-cloudtrail-api-calls:
       groupBy:
         type: string
         value: eventName
-        orderBy: COUNT
+        orderBy: UnauthorizedApiCallsCount
         limit: 10
 

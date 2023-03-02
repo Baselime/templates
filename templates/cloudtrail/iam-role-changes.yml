@@ -12,4 +12,4 @@ iam-role-changes:
       groupBy:
         type: string
         value: userIdentity.arn
-        orderBy: COUNT
+        orderBy: IamRoleChangesCount
